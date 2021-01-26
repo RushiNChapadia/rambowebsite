@@ -19,7 +19,12 @@ admin.site.site_header = "Rambo GAMING Admin"
 admin.site.site_title = "Rambo GAMING Admin Portal"
 admin.site.index_title = "Welcome to Rambo GAMING"
 
+from django.views.static import serve
+from danjo.conf.urls import url
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('home.urls'))
+    path('', include('home.urls')),
+    url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 ]
